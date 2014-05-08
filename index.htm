@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8>
+<title>HTML5 Chat</title>
+<body>
+<section id="wrapper">
+ 
+    <header>
+      <h1>HTML5 Chat</h1>
+    </header>
+ 
+<style>
+ 
+#chat { width: 97%; }
+.message { font-weight: bold; }
+.message:before { content: ' '; color: #bbb; font-size: 14px; }
+#log {
+  overflow: auto;
+  max-height: 300px;
+  list-style: none;
+  padding: 0;
+}
+#log li {
+  border-top: 1px solid #ccc;
+  margin: 0;
+  padding: 10px 0;
+}
+body { 
+  font: normal 16px/20px "Helvetica Neue", Helvetica, sans-serif;
+  background: rgb(237, 237, 236);
+  margin: 0;
+  margin-top: 40px;
+  padding: 0;
+}
+ 
+section, header {
+  display: block;
+}
+ 
+#wrapper {
+  width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  border-top: 1px solid #fff;
+  padding-bottom: 16px;
+}
+ 
+h1 {
+  padding-top: 10px;
+}
+ 
+h2 {
+  font-size: 100%;
+  font-style: italic;
+}
+ 
+header,
+article > * {
+  margin: 20px;
+}
+ 
+#status {
+  padding: 5px;
+  color: #fff;
+  background: #ccc;
+}
+ 
+#status.fail {
+  background: #c00;
+}
+ 
+#status.success {
+  background: #0c0;
+}
+ 
+#status.offline {
+  background: #c00;
+}
+ 
+#status.online {
+  background: #0c0;
+}
+ 
+#html5badge {
+  margin-left: -30px;
+  border: 0;
+}
+ 
+#html5badge img {
+  border: 0;
+}
+
+td {
+  border: solid 2px black;
+  width: 50px;
+  height: 50px;
+}
+</style>
+<article>
+  <form onsubmit="addMessage(); return false;">
+    <input type="text" id="chat" placeholder="type and press enter to chat" />
+    <br />
+    <select id="numOfCards">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    </select>
+    <input type="button" id="" onclick="GetCards(document.getElementById('numOfCards').value)"/>
+  </form>
+  <p id="status">Not connected</p>
+  <p>Users connected: <span id="connected">0</span></p>
+  <p>To test, open two windows with Web Socket support, type a message above and press return.</p>
+  <ul id="log"></ul>
+</article>
+<script>
+ 
+    connected = document.getElementById("connected");
+    log = document.getElementById("log");
+    chat = document.getElementById("chat");
+    form = chat.form;
+    state = document.getElementById("status");
+ 
+    if (window.WebSocket === undefined)
+    {
+        state.innerHTML = "sockets not supported";
+        state.className = "fail";
+    }
+    else
+    {
+        if (typeof String.prototype.startsWith != "function")
+        {
+            String.prototype.startsWith = function (str)
+            {
+                return this.indexOf(str) == 0;
+            };
+        }
+    
+        window.addEventListener("load", onLoad, false);
+    }
+ 
+    function onLoad()
+    {
+        var wsUri = "ws://192.168.0.8:7761";  
+  
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function(evt) { onOpen(evt) };
+        websocket.onclose = function(evt) { onClose(evt) };
+        websocket.onmessage = function(evt) { onMessage(evt) };
+        websocket.onerror = function(evt) { onError(evt) };
+    }
+    
+    function ResetCards() {
+    	for (var i=1;i<7;i++) 
+    	{
+    		for(var j=1;j<4;j++)
+    		{
+    			for(var k=1;k<10;k++)
+	    		{
+	    			document.getElementById("c" + i + "r" + j + "s" + k).innerHTML = "";
+	    		}
+    		}
+    	}
+    }
+    
+    function GetCards(NumberOfCards)
+    {
+        var array0 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        var array10 = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+        var array20 = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
+        var array30 = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
+        var array40 = [40, 41, 42, 43, 44, 45, 46, 47, 48, 49];
+        var array50 = [50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
+        var array60 = [60, 61, 62, 63, 64, 65, 66, 67, 68, 69];
+        var array70 = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79];
+        var array80 = [80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90];
+        var arrayFull = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90];
+     	var MyCards = [];
+     	document.getElementById("numbers").innerHTML = "";
+     	
+     	ResetCards();
+     	
+     	//Populate minimum card requirement first
+     	for (var i=0;i<NumberOfCards;i++)
+     	{
+	     	var MyNumbers = [];
+	     	
+	     	//Get a numbers from each section (Total: 9)
+	        var MyNumbers = [array0[Math.floor(Math.random() * array0.length - 1) + 1],array10[Math.floor(Math.random() * array10.length - 1) + 1],array20[Math.floor(Math.random() * array20.length - 1) + 1],array30[Math.floor(Math.random() * array30.length - 1) + 1],array40[Math.floor(Math.random() * array40.length - 1) + 1],array50[Math.floor(Math.random() * array50.length - 1) + 1],array60[Math.floor(Math.random() * array60.length - 1) + 1],array70[Math.floor(Math.random() * array70.length - 1) + 1],array80[Math.floor(Math.random() * array80.length - 1) + 1]];
+	        
+	        //Remove from each section
+	        array0.splice(array0.indexOf(MyNumbers[0]), 1);
+	        array10.splice(array10.indexOf(MyNumbers[1]), 1);
+	        array20.splice(array20.indexOf(MyNumbers[2]), 1);
+	        array30.splice(array30.indexOf(MyNumbers[3]), 1);
+	        array40.splice(array40.indexOf(MyNumbers[4]), 1);
+	        array50.splice(array50.indexOf(MyNumbers[5]), 1);
+	        array60.splice(array60.indexOf(MyNumbers[6]), 1);
+	        array70.splice(array70.indexOf(MyNumbers[7]), 1);
+	        array80.splice(array80.indexOf(MyNumbers[8]), 1);
+	        
+	        //Remove from master list
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[0]), 1);
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[1]), 1);
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[2]), 1);
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[3]), 1);
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[4]), 1);
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[5]), 1);
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[6]), 1);
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[7]), 1);
+	        arrayFull.splice(arrayFull.indexOf(MyNumbers[8]), 1);
+	        
+	        MyCards[i] = MyNumbers;
+	        
+	        //document.getElementById("numbers").innerHTML += MyCards[i] + "<br />" + arrayFull + " (" + arrayFull.length + ")<br /><br />";
+	        //document.getElementById("numbers").innerHTML += arrayFull[Math.floor(Math.random() * arrayFull.length - 1) + 1] + "<br />";
+	    }
+	    
+	    //Add remaining numbers
+	    for (var i=0;i<NumberOfCards;i++)
+     	{
+     		var count0 = 0;
+     		var count10 = 0;
+     		var count20 = 0;
+     		var count30 = 0;
+     		var count40 = 0;
+     		var count50 = 0;
+     		var count60 = 0;
+     		var count70 = 0;
+     		var count80 = 0;
+     		var categoryNum, categoryCount;
+     		
+     		for (var j=9;j<15;j++)
+     		{
+     			var RandNum = arrayFull[Math.floor(Math.random() * arrayFull.length - 1) + 1];
+     			categoryNum = Math.floor(RandNum / 10);
+     			
+     			if (categoryNum == 9)
+     			{
+     				categoryNum = 8;
+     			}
+	     			
+     			switch(categoryNum)
+     			{
+     				case 0:
+     					count0 += 1;
+     					categoryCount = count0;
+     				break;
+     				
+     				case 1:
+     					count10 += 1;
+     					categoryCount = count10;
+     				break;
+     				
+     				case 2:
+     					count20 += 1;
+     					categoryCount = count20;
+     				break;
+     				
+     				case 3:
+     					count30 += 1;
+     					categoryCount = count30;
+     				break;
+     				
+     				case 4:
+     					count40 += 1;
+     					categoryCount = count40;
+     				break;
+     				
+     				case 5:
+     					count50 += 1;
+     					categoryCount = count50;
+     				break;
+     				
+     				case 6:
+     					count60 += 1;
+     					categoryCount = count60;
+     				break;
+     				
+     				case 7:
+     					count70 += 1;
+     					categoryCount = count70;
+     				break;
+     				
+     				case 8:
+     					count80 += 1;
+     					categoryCount = count80;
+     				break;
+     			}
+     			
+     			if (categoryCount >= 3)
+     			{
+     				while (categoryCount >= 3)
+     				{
+     					RandNum = arrayFull[Math.floor(Math.random() * arrayFull.length - 1) + 1];
+     					categoryNum = Math.floor(RandNum / 10);
+     					
+     					if (categoryNum == 9)
+		     			{
+		     				categoryNum = 8;
+		     			}
+	     			
+	     				switch(categoryNum)
+		     			{
+		     				case 0:
+		     					count0 += 1;
+		     					categoryCount = count0;
+		     				break;
+		     				
+		     				case 1:
+		     					count10 += 1;
+		     					categoryCount = count10;
+		     				break;
+		     				
+		     				case 2:
+		     					count20 += 1;
+		     					categoryCount = count20;
+		     				break;
+		     				
+		     				case 3:
+		     					count30 += 1;
+		     					categoryCount = count30;
+		     				break;
+		     				
+		     				case 4:
+		     					count40 += 1;
+		     					categoryCount = count40;
+		     				break;
+		     				
+		     				case 5:
+		     					count50 += 1;
+		     					categoryCount = count50;
+		     				break;
+		     				
+		     				case 6:
+		     					count60 += 1;
+		     					categoryCount = count60;
+		     				break;
+		     				
+		     				case 7:
+		     					count70 += 1;
+		     					categoryCount = count70;
+		     				break;
+		     				
+		     				case 8:
+		     					count80 += 1;
+		     					categoryCount = count80;
+		     				break;
+		     			}
+     				}
+     			}
+     			
+     			MyCards[i].push(RandNum);
+     			arrayFull.splice(arrayFull.indexOf(RandNum), 1);
+     			
+     			//document.getElementById("numbers").innerHTML += "RandNum: " + RandNum + "<br /> Category: " + Math.floor(RandNum / 10) + "<br />";
+     		}
+     		
+     		//
+     		MyCards[i].sort();
+     		document.getElementById("numbers").innerHTML += MyCards[i] + "<br />" + arrayFull + " (" + arrayFull.length + ")<br /><br />";
+     		
+     		var TempArray = MyCards[i];
+     		
+     		//Add numbers to card
+     		for (var a=1;a<4;a++)
+     		{
+     			var LineArray = [];
+     			count0 = 0;
+	     		count10 = 0;
+	     		count20 = 0;
+	     		count30 = 0;
+	     		count40 = 0;
+	     		count50 = 0;
+	     		count60 = 0;
+	     		count70 = 0;
+	     		count80 = 0;
+		     	categoryCount = 0;
+		     	
+	     		for (var b=1;b<6;b++)
+	     		{
+     				
+	     			var CardNum = TempArray[Math.floor(Math.random() * TempArray.length - 1) + 1];
+//	     			categoryNum = Math.floor(CardNum / 10);
+//	     			if (categoryNum == 9)
+//	     			{
+//	     				categoryNum = 8;
+//	     			}
+//	     			
+//	     			switch(categoryNum)
+//	     			{
+//	     				case 0:
+//	     					count0 += 1;
+//	     					categoryCount = count0;
+//	     				break;
+//	     				
+//	     				case 1:
+//	     					count10 += 1;
+//	     					categoryCount = count10;
+//	     				break;
+//	     				
+//	     				case 2:
+//	     					count20 += 1;
+//	     					categoryCount = count20;
+//	     				break;
+//	     				
+//	     				case 3:
+//	     					count30 += 1;
+//	     					categoryCount = count30;
+//	     				break;
+//	     				
+//	     				case 4:
+//	     					count40 += 1;
+//	     					categoryCount = count40;
+//	     				break;
+//	     				
+//	     				case 5:
+//	     					count50 += 1;
+//	     					categoryCount = count50;
+//	     				break;
+//	     				
+//	     				case 6:
+//	     					count60 += 1;
+//	     					categoryCount = count60;
+//	     				break;
+//	     				
+//	     				case 7:
+//	     					count70 += 1;
+//	     					categoryCount = count70;
+//	     				break;
+//	     				
+//	     				case 8:
+//	     					count80 += 1;
+//	     					categoryCount = count80;
+//	     				break;
+//	     			}
+//	     			
+//	     			if (categoryCount >= 2)
+//	     			{
+//	     				while (categoryCount >= 2)
+//	     				{
+//	     					CardNum = TempArray[Math.floor(Math.random() * TempArray.length - 1) + 1];
+//	     					categoryNum = Math.floor(CardNum / 10);
+//	     					
+//	     					if (categoryNum == 9)
+//			     			{
+//			     				categoryNum = 8;
+//			     			}
+//			     			
+//		     				switch(categoryNum)
+//			     			{
+//			     				case 0:
+//			     					count0 += 1;
+//			     					categoryCount = count0;
+//			     				break;
+//			     				
+//			     				case 1:
+//			     					count10 += 1;
+//			     					categoryCount = count10;
+//			     				break;
+//			     				
+//			     				case 2:
+//			     					count20 += 1;
+//			     					categoryCount = count20;
+//			     				break;
+//			     				
+//			     				case 3:
+//			     					count30 += 1;
+//			     					categoryCount = count30;
+//			     				break;
+//			     				
+//			     				case 4:
+//			     					count40 += 1;
+//			     					categoryCount = count40;
+//			     				break;
+//			     				
+//			     				case 5:
+//			     					count50 += 1;
+//			     					categoryCount = count50;
+//			     				break;
+//			     				
+//			     				case 6:
+//			     					count60 += 1;
+//			     					categoryCount = count60;
+//			     				break;
+//			     				
+//			     				case 7:
+//			     					count70 += 1;
+//			     					categoryCount = count70;
+//			     				break;
+//			     				
+//			     				case 8:
+//			     					count80 += 1;
+//			     					categoryCount = count80;
+//			     				break;
+//			     			}
+//	     				}
+//	     			}
+//	     			
+//	     			var squareID = (Math.floor(CardNum / 10)) + 1;
+//	     			if (squareID == 10)
+//	     			{
+//	     				squareID = 9;
+//	     			}
+//	     			
+//	     			document.getElementById("c" + (i + 1) + "r" + a + "s" + squareID).innerHTML = CardNum;
+//	     			
+	     			LineArray.push(CardNum);
+	     			TempArray.splice(TempArray.indexOf(CardNum), 1);
+	     			
+	 				document.getElementById("numbers").innerHTML += LineArray + "<br />";
+	     		}
+	     	}
+	     	
+     		//Show card
+     		document.getElementById("card" + (i + 1)).style.display = 'block';
+     		document.getElementById("card" + (i + 1)).style.visibility = 'visible';
+     	}
+	    
+    }
+  
+    function onOpen(evt)
+    {
+        state.className = "success";
+        state.innerHTML = "Connected to server";  
+    }
+  
+    function onClose(evt)
+    {
+        state.className = "fail";
+        state.innerHTML = "Not connected";
+        connected.innerHTML = "0";        
+    }
+  
+    function onMessage(evt)
+    {
+        // There are two types of messages: 
+        //     1. a chat participant message itself
+        //     2. a message with a number of connected chat participants
+  
+        var message = evt.data;
+  
+        if (message.startsWith("log:"))
+        {
+            message = message.slice("log:".length);
+            log.innerHTML = '<li class="message">' + message + "</li>" + log.innerHTML;  
+        }
+        else if (message.startsWith("connected:"))
+        {
+            message = message.slice("connected:".length);
+            connected.innerHTML = message;  
+        }    
+    }
+ 
+    function onError(evt)
+    { 
+        state.className = "fail";
+        state.innerHTML = "Communication error";
+    }
+  
+    function addMessage()
+    {
+        var message = chat.value;
+      
+        chat.value = "";
+    
+        websocket.send(message);
+    }  
+ 
+</script>
+
+<br />
+
+<div id="numbers"></div><br />
+<div id="card1" style="display:none; visibility:hidden;">
+<table style="width:100%; text-align:center; border-spacing: 0px; font-size:32px;">
+	<tr>
+		<td id="c1r1s1"></td>
+		<td id="c1r1s2"></td>
+		<td id="c1r1s3"></td>
+		<td id="c1r1s4"></td>
+		<td id="c1r1s5"></td>
+		<td id="c1r1s6"></td>
+		<td id="c1r1s7"></td>
+		<td id="c1r1s8"></td>
+		<td id="c1r1s9"></td>
+	</tr>
+	<tr>
+		<td id="c1r2s1"></td>
+		<td id="c1r2s2"></td>
+		<td id="c1r2s3"></td>
+		<td id="c1r2s4"></td>
+		<td id="c1r2s5"></td>
+		<td id="c1r2s6"></td>
+		<td id="c1r2s7"></td>
+		<td id="c1r2s8"></td>
+		<td id="c1r2s9"></td>
+	</tr>
+	<tr>
+		<td id="c1r3s1"></td>
+		<td id="c1r3s2"></td>
+		<td id="c1r3s3"></td>
+		<td id="c1r3s4"></td>
+		<td id="c1r3s5"></td>
+		<td id="c1r3s6"></td>
+		<td id="c1r3s7"></td>
+		<td id="c1r3s8"></td>
+		<td id="c1r3s9"></td>
+	</tr>
+</table>
+</div><br />
+<div id="card2" style="display:none; visibility:hidden;">
+<table style="width:100%; text-align:center; border-spacing: 0px; font-size:32px;">
+	<tr>
+		<td id="c2r1s1"></td>
+		<td id="c2r1s2"></td>
+		<td id="c2r1s3"></td>
+		<td id="c2r1s4"></td>
+		<td id="c2r1s5"></td>
+		<td id="c2r1s6"></td>
+		<td id="c2r1s7"></td>
+		<td id="c2r1s8"></td>
+		<td id="c2r1s9"></td>
+	</tr>
+	<tr>
+		<td id="c2r2s1"></td>
+		<td id="c2r2s2"></td>
+		<td id="c2r2s3"></td>
+		<td id="c2r2s4"></td>
+		<td id="c2r2s5"></td>
+		<td id="c2r2s6"></td>
+		<td id="c2r2s7"></td>
+		<td id="c2r2s8"></td>
+		<td id="c2r2s9"></td>
+	</tr>
+	<tr>
+		<td id="c2r3s1"></td>
+		<td id="c2r3s2"></td>
+		<td id="c2r3s3"></td>
+		<td id="c2r3s4"></td>
+		<td id="c2r3s5"></td>
+		<td id="c2r3s6"></td>
+		<td id="c2r3s7"></td>
+		<td id="c2r3s8"></td>
+		<td id="c2r3s9"></td>
+	</tr>
+</table>
+</div>
+<br />
+<div id="card3" style="display:none; visibility:hidden;">
+<table style="width:100%; text-align:center; border-spacing: 0px; font-size:32px;">
+	<tr>
+		<td id="c3r1s1"></td>
+		<td id="c3r1s2"></td>
+		<td id="c3r1s3"></td>
+		<td id="c3r1s4"></td>
+		<td id="c3r1s5"></td>
+		<td id="c3r1s6"></td>
+		<td id="c3r1s7"></td>
+		<td id="c3r1s8"></td>
+		<td id="c3r1s9"></td>
+	</tr>
+	<tr>
+		<td id="c3r2s1"></td>
+		<td id="c3r2s2"></td>
+		<td id="c3r2s3"></td>
+		<td id="c3r2s4"></td>
+		<td id="c3r2s5"></td>
+		<td id="c3r2s6"></td>
+		<td id="c3r2s7"></td>
+		<td id="c3r2s8"></td>
+		<td id="c3r2s9"></td>
+	</tr>
+	<tr>
+		<td id="c3r3s1"></td>
+		<td id="c3r3s2"></td>
+		<td id="c3r3s3"></td>
+		<td id="c3r3s4"></td>
+		<td id="c3r3s5"></td>
+		<td id="c3r3s6"></td>
+		<td id="c3r3s7"></td>
+		<td id="c3r3s8"></td>
+		<td id="c3r3s9"></td>
+	</tr>
+</table>
+</div>
+<br />
+<div id="card4" style="display:none; visibility:hidden;">
+<table style="width:100%; text-align:center; border-spacing: 0px; font-size:32px;">
+	<tr>
+		<td id="c4r1s1"></td>
+		<td id="c4r1s2"></td>
+		<td id="c4r1s3"></td>
+		<td id="c4r1s4"></td>
+		<td id="c4r1s5"></td>
+		<td id="c4r1s6"></td>
+		<td id="c4r1s7"></td>
+		<td id="c4r1s8"></td>
+		<td id="c4r1s9"></td>
+	</tr>
+	<tr>
+		<td id="c4r2s1"></td>
+		<td id="c4r2s2"></td>
+		<td id="c4r2s3"></td>
+		<td id="c4r2s4"></td>
+		<td id="c4r2s5"></td>
+		<td id="c4r2s6"></td>
+		<td id="c4r2s7"></td>
+		<td id="c4r2s8"></td>
+		<td id="c4r2s9"></td>
+	</tr>
+	<tr>
+		<td id="c4r3s1"></td>
+		<td id="c4r3s2"></td>
+		<td id="c4r3s3"></td>
+		<td id="c4r3s4"></td>
+		<td id="c4r3s5"></td>
+		<td id="c4r3s6"></td>
+		<td id="c4r3s7"></td>
+		<td id="c4r3s8"></td>
+		<td id="c4r3s9"></td>
+	</tr>
+</table>
+</div>
+<br />
+<div id="card5" style="display:none; visibility:hidden;">
+<table style="width:100%; text-align:center; border-spacing: 0px; font-size:32px;">
+	<tr>
+		<td id="c5r1s1"></td>
+		<td id="c5r1s2"></td>
+		<td id="c5r1s3"></td>
+		<td id="c5r1s4"></td>
+		<td id="c5r1s5"></td>
+		<td id="c5r1s6"></td>
+		<td id="c5r1s7"></td>
+		<td id="c5r1s8"></td>
+		<td id="c5r1s9"></td>
+	</tr>
+	<tr>
+		<td id="c5r2s1"></td>
+		<td id="c5r2s2"></td>
+		<td id="c5r2s3"></td>
+		<td id="c5r2s4"></td>
+		<td id="c5r2s5"></td>
+		<td id="c5r2s6"></td>
+		<td id="c5r2s7"></td>
+		<td id="c5r2s8"></td>
+		<td id="c5r2s9"></td>
+	</tr>
+	<tr>
+		<td id="c5r3s1"></td>
+		<td id="c5r3s2"></td>
+		<td id="c5r3s3"></td>
+		<td id="c5r3s4"></td>
+		<td id="c5r3s5"></td>
+		<td id="c5r3s6"></td>
+		<td id="c5r3s7"></td>
+		<td id="c5r3s8"></td>
+		<td id="c5r3s9"></td>
+	</tr>
+</table>
+</div>
+<br />
+<div id="card6" style="display:none; visibility:hidden;">
+<table style="width:100%; text-align:center; border-spacing: 0px; font-size:32px;">
+	<tr>
+		<td id="c6r1s1"></td>
+		<td id="c6r1s2"></td>
+		<td id="c6r1s3"></td>
+		<td id="c6r1s4"></td>
+		<td id="c6r1s5"></td>
+		<td id="c6r1s6"></td>
+		<td id="c6r1s7"></td>
+		<td id="c6r1s8"></td>
+		<td id="c6r1s9"></td>
+	</tr>
+	<tr>
+		<td id="c6r2s1"></td>
+		<td id="c6r2s2"></td>
+		<td id="c6r2s3"></td>
+		<td id="c6r2s4"></td>
+		<td id="c6r2s5"></td>
+		<td id="c6r2s6"></td>
+		<td id="c6r2s7"></td>
+		<td id="c6r2s8"></td>
+		<td id="c6r2s9"></td>
+	</tr>
+	<tr>
+		<td id="c6r3s1"></td>
+		<td id="c6r3s2"></td>
+		<td id="c6r3s3"></td>
+		<td id="c6r3s4"></td>
+		<td id="c6r3s5"></td>
+		<td id="c6r3s6"></td>
+		<td id="c6r3s7"></td>
+		<td id="c6r3s8"></td>
+		<td id="c6r3s9"></td>
+	</tr>
+</table>
+</div>
+<br />
+
+<!--<div id="numbers0"></div><br />
+<div id="numbers10"></div><br />
+<div id="numbers20"></div><br />
+<div id="numbers30"></div><br />
+<div id="numbers40"></div><br />
+<div id="numbers50"></div><br />
+<div id="numbers60"></div><br />
+<div id="numbers70"></div><br />
+<div id="numbers80"></div><br />
+<div id="numbersM"></div><br />-->
+</section>
+</body>
+</html>
