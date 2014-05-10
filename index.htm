@@ -358,11 +358,11 @@ td {
      			arrayFull.splice(arrayFull.indexOf(RandNum), 1);
      			
      			//document.getElementById("numbers").innerHTML += "RandNum: " + RandNum + "<br /> Category: " + Math.floor(RandNum / 10) + "<br />";
-     		}
+     		} //end getting remaining numbers
      		
      		//
      		MyCards[i].sort();
-     		document.getElementById("numbers").innerHTML += MyCards[i] + "<br />" + arrayFull + " (" + arrayFull.length + ")<br /><br />";
+     		//document.getElementById("numbers").innerHTML += MyCards[i] + "<br />" + arrayFull + " (" + arrayFull.length + ")<br /><br />";
      		
      		var TempArray = MyCards[i];
      		
@@ -383,138 +383,138 @@ td {
 		     	
 	     		for (var b=1;b<6;b++)
 	     		{
-     				
 	     			var CardNum = TempArray[Math.floor(Math.random() * TempArray.length - 1) + 1];
-//	     			categoryNum = Math.floor(CardNum / 10);
-//	     			if (categoryNum == 9)
-//	     			{
-//	     				categoryNum = 8;
-//	     			}
-//	     			
-//	     			switch(categoryNum)
-//	     			{
-//	     				case 0:
-//	     					count0 += 1;
-//	     					categoryCount = count0;
-//	     				break;
-//	     				
-//	     				case 1:
-//	     					count10 += 1;
-//	     					categoryCount = count10;
-//	     				break;
-//	     				
-//	     				case 2:
-//	     					count20 += 1;
-//	     					categoryCount = count20;
-//	     				break;
-//	     				
-//	     				case 3:
-//	     					count30 += 1;
-//	     					categoryCount = count30;
-//	     				break;
-//	     				
-//	     				case 4:
-//	     					count40 += 1;
-//	     					categoryCount = count40;
-//	     				break;
-//	     				
-//	     				case 5:
-//	     					count50 += 1;
-//	     					categoryCount = count50;
-//	     				break;
-//	     				
-//	     				case 6:
-//	     					count60 += 1;
-//	     					categoryCount = count60;
-//	     				break;
-//	     				
-//	     				case 7:
-//	     					count70 += 1;
-//	     					categoryCount = count70;
-//	     				break;
-//	     				
-//	     				case 8:
-//	     					count80 += 1;
-//	     					categoryCount = count80;
-//	     				break;
-//	     			}
-//	     			
-//	     			if (categoryCount > 1)
-//	     			{
-//	     				while (categoryCount > 1)
-//	     				{
-//	     					CardNum = TempArray[Math.floor(Math.random() * TempArray.length - 1) + 1];
-//	     					categoryNum = Math.floor(CardNum / 10);
+	     			categoryNum = Math.floor(CardNum / 10);
 
-//	     					if (categoryNum == 9)
-//			     			{
-//			     				categoryNum = 8;
-//			     			}
-//			     			
-//		     				switch(categoryNum)
-//			     			{
-//			     				case 0:
-//			     					count0 += 1;
-//			     					categoryCount = count0;
-//			     				break;
-//			     				
-//			     				case 1:
-//			     					count10 += 1;
-//			     					categoryCount = count10;
-//			     				break;
-//			     				
-//			     				case 2:
-//			     					count20 += 1;
-//			     					categoryCount = count20;
-//			     				break;
-//			     				
-//			     				case 3:
-//			     					count30 += 1;
-//			     					categoryCount = count30;
-//			     				break;
-//			     				
-//			     				case 4:
-//			     					count40 += 1;
-//			     					categoryCount = count40;
-//			     				break;
-//			     				
-//			     				case 5:
-//			     					count50 += 1;
-//			     					categoryCount = count50;
-//			     				break;
-//			     				
-//			     				case 6:
-//			     					count60 += 1;
-//			     					categoryCount = count60;
-//			     				break;
-//			     				
-//			     				case 7:
-//			     					count70 += 1;
-//			     					categoryCount = count70;
-//			     				break;
-//			     				
-//			     				case 8:
-//			     					count80 += 1;
-//			     					categoryCount = count80;
-//			     				break;
-//			     			}
-//	     				}
-//	     			}
-//	     			
+	     			if (categoryNum == 9)
+	     			{
+	     				categoryNum = 8;
+	     			}
+	     			
+	     			switch(categoryNum)
+	     			{
+	     				case 0:
+	     					count0 += 1;
+	     					categoryCount = count0;
+	     				break;
+	     				
+	     				case 1:
+	     					count10 += 1;
+	     					categoryCount = count10;
+	     				break;
+	     				
+	     				case 2:
+	     					count20 += 1;
+	     					categoryCount = count20;
+	     				break;
+	     				
+	     				case 3:
+	     					count30 += 1;
+	     					categoryCount = count30;
+	     				break;
+	     				
+	     				case 4:
+	     					count40 += 1;
+	     					categoryCount = count40;
+	     				break;
+	     				
+	     				case 5:
+	     					count50 += 1;
+	     					categoryCount = count50;
+	     				break;
+	     				
+	     				case 6:
+	     					count60 += 1;
+	     					categoryCount = count60;
+	     				break;
+	     				
+	     				case 7:
+	     					count70 += 1;
+	     					categoryCount = count70;
+	     				break;
+	     				
+	     				case 8:
+	     					count80 += 1;
+	     					categoryCount = count80;
+	     				break;
+	     			}
+	     			
+	     			if (categoryCount > 1)
+	     			{
+	     				while (categoryCount > 1)
+	     				{
+	     					CardNum = TempArray[Math.floor(Math.random() * TempArray.length - 1) + 1];
+	     					categoryNum = Math.floor(CardNum / 10);
+
+	     					if (categoryNum == 9)
+			     			{
+			     				categoryNum = 8;
+			     			}
+			     			
+		     				switch(categoryNum)
+			     			{
+			     				case 0:
+			     					count0 += 1;
+			     					categoryCount = count0;
+			     				break;
+			     				
+			     				case 1:
+			     					count10 += 1;
+			     					categoryCount = count10;
+			     				break;
+			     				
+			     				case 2:
+			     					count20 += 1;
+			     					categoryCount = count20;
+			     				break;
+			     				
+			     				case 3:
+			     					count30 += 1;
+			     					categoryCount = count30;
+			     				break;
+			     				
+			     				case 4:
+			     					count40 += 1;
+			     					categoryCount = count40;
+			     				break;
+			     				
+			     				case 5:
+			     					count50 += 1;
+			     					categoryCount = count50;
+			     				break;
+			     				
+			     				case 6:
+			     					count60 += 1;
+			     					categoryCount = count60;
+			     				break;
+			     				
+			     				case 7:
+			     					count70 += 1;
+			     					categoryCount = count70;
+			     				break;
+			     				
+			     				case 8:
+			     					count80 += 1;
+			     					categoryCount = count80;
+			     				break;
+			     			}
+	     				}
+	     			}
+	     			
 //	     			var squareID = (Math.floor(CardNum / 10)) + 1;
 //	     			if (squareID == 10)
 //	     			{
 //	     				squareID = 9;
 //	     			}
-//	     			
-//	     			document.getElementById("c" + (i + 1) + "r" + a + "s" + squareID).innerHTML = CardNum;
-//	     			
+	     			
+	     			//document.getElementById("c" + (i + 1) + "r" + a + "s" + squareID).innerHTML = CardNum;
+	     			
 	     			LineArray.push(CardNum);
 	     			TempArray.splice(TempArray.indexOf(CardNum), 1);
 	     			
-	 				document.getElementById("numbers").innerHTML += LineArray + "<br />";
+	 				document.getElementById("numbers").innerHTML += LineArray + " (" + TempArray + ")";
 	     		}
-	     	}
+	     	} //End of 
 	     	
      		//Show card
      		document.getElementById("card" + (i + 1)).style.display = 'block';
@@ -533,7 +533,7 @@ td {
     {
         state.className = "fail";
         state.innerHTML = "Not connected";
-        connected.innerHTML = "0";        
+        connected.innerHTML = "0";
     }
   
     function onMessage(evt)
