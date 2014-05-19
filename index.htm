@@ -179,7 +179,9 @@ td {
         var array70 = [70, 71, 72, 73, 74, 75, 76, 77, 78, 79];
         var array80 = [80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90];
         var arrayFull = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90];
-     	var MyCards = [];
+     	var MyCards = []; //Array of cards (1-6)
+     	var InitialNumbers = [];
+     	  	
      	document.getElementById("numbers").innerHTML = "";
      	
      	ResetCards();
@@ -187,47 +189,51 @@ td {
      	//Populate minimum card requirement first
      	for (var i=0;i<NumberOfCards;i++)
      	{
-	     	var MyNumbers = [];
-	     	var Card = [];
-	     	var CardLine1 = [];
+     		var CardLine1 = [];
 	     	var CardLine2 = [];
 	     	var CardLine3 = [];
 	     	
 	     	//Get a numbers from each section (Total: 9)
-	        var MyNumbers = [array0[Math.floor(Math.random() * array0.length - 1) + 1],array10[Math.floor(Math.random() * array10.length - 1) + 1],array20[Math.floor(Math.random() * array20.length - 1) + 1],array30[Math.floor(Math.random() * array30.length - 1) + 1],array40[Math.floor(Math.random() * array40.length - 1) + 1],array50[Math.floor(Math.random() * array50.length - 1) + 1],array60[Math.floor(Math.random() * array60.length - 1) + 1],array70[Math.floor(Math.random() * array70.length - 1) + 1],array80[Math.floor(Math.random() * array80.length - 1) + 1]];
-	        
-	        CardLine1[0] = MyNumbers[0];	//array0[Math.floor(Math.random() * array0.length - 1) + 1];
-	        CardLine2[0] = MyNumbers[1];	//array10[Math.floor(Math.random() * array10.length - 1) + 1];
-	        CardLine3[0] = MyNumbers[2];	//array20[Math.floor(Math.random() * array20.length - 1) + 1];
-	        CardLine1[1] = MyNumbers[3];	//array30[Math.floor(Math.random() * array30.length - 1) + 1];
-	        CardLine2[1] = MyNumbers[4];	//array40[Math.floor(Math.random() * array40.length - 1) + 1];
-	        CardLine3[1] = MyNumbers[5];	//array50[Math.floor(Math.random() * array50.length - 1) + 1];
-	        CardLine1[2] = MyNumbers[6];	//array60[Math.floor(Math.random() * array60.length - 1) + 1];
-	        CardLine2[2] = MyNumbers[7];	//array70[Math.floor(Math.random() * array70.length - 1) + 1];
-	        CardLine3[2] = MyNumbers[8];	//array80[Math.floor(Math.random() * array80.length - 1) + 1];
-	        
+	        InitialNumbers = [array0[Math.floor(Math.random() * array0.length - 1) + 1],array10[Math.floor(Math.random() * array10.length - 1) + 1],array20[Math.floor(Math.random() * array20.length - 1) + 1],array30[Math.floor(Math.random() * array30.length - 1) + 1],array40[Math.floor(Math.random() * array40.length - 1) + 1],array50[Math.floor(Math.random() * array50.length - 1) + 1],array60[Math.floor(Math.random() * array60.length - 1) + 1],array70[Math.floor(Math.random() * array70.length - 1) + 1],array80[Math.floor(Math.random() * array80.length - 1) + 1]];
+
+	        CardLine1[0] = InitialNumbers[0];	//array0[Math.floor(Math.random() * array0.length - 1) + 1];
+	        CardLine2[0] = InitialNumbers[1];	//array10[Math.floor(Math.random() * array10.length - 1) + 1];
+	        CardLine3[0] = InitialNumbers[2];	//array20[Math.floor(Math.random() * array20.length - 1) + 1];
+	        CardLine1[1] = InitialNumbers[3];	//array30[Math.floor(Math.random() * array30.length - 1) + 1];
+	        CardLine2[1] = InitialNumbers[4];	//array40[Math.floor(Math.random() * array40.length - 1) + 1];
+	        CardLine3[1] = InitialNumbers[5];	//array50[Math.floor(Math.random() * array50.length - 1) + 1];
+	        CardLine1[2] = InitialNumbers[6];	//array60[Math.floor(Math.random() * array60.length - 1) + 1];
+	        CardLine2[2] = InitialNumbers[7];	//array70[Math.floor(Math.random() * array70.length - 1) + 1];
+	        CardLine3[2] = InitialNumbers[8];	//array80[Math.floor(Math.random() * array80.length - 1) + 1];
+
 	        //Remove from each section
-	        array0.splice(array0.indexOf(MyNumbers[0]), 1);
-	        array10.splice(array10.indexOf(MyNumbers[1]), 1);
-	        array20.splice(array20.indexOf(MyNumbers[2]), 1);
-	        array30.splice(array30.indexOf(MyNumbers[3]), 1);
-	        array40.splice(array40.indexOf(MyNumbers[4]), 1);
-	        array50.splice(array50.indexOf(MyNumbers[5]), 1);
-	        array60.splice(array60.indexOf(MyNumbers[6]), 1);
-	        array70.splice(array70.indexOf(MyNumbers[7]), 1);
-	        array80.splice(array80.indexOf(MyNumbers[8]), 1);
-	        
+	        array0.splice(array0.indexOf(InitialNumbers[0]), 1);
+	        array10.splice(array10.indexOf(InitialNumbers[1]), 1);
+	        array20.splice(array20.indexOf(InitialNumbers[2]), 1);
+	        array30.splice(array30.indexOf(InitialNumbers[3]), 1);
+	        array40.splice(array40.indexOf(InitialNumbers[4]), 1);
+	        array50.splice(array50.indexOf(InitialNumbers[5]), 1);
+	        array60.splice(array60.indexOf(InitialNumbers[6]), 1);
+	        array70.splice(array70.indexOf(InitialNumbers[7]), 1);
+	        array80.splice(array80.indexOf(InitialNumbers[8]), 1);
+
 	        //Remove from master list
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[0]), 1);
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[1]), 1);
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[2]), 1);
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[3]), 1);
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[4]), 1);
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[5]), 1);
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[6]), 1);
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[7]), 1);
-	        arrayFull.splice(arrayFull.indexOf(MyNumbers[8]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[0]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[1]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[2]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[3]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[4]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[5]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[6]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[7]), 1);
+	        arrayFull.splice(arrayFull.indexOf(InitialNumbers[8]), 1);
 	        
+	        MyCards[i] = [CardLine1, CardLine2, CardLine3];
+		}
+		
+		//Populate cards first so that they all contain 1 number from each category
+		for (var i=0;i<NumberOfCards;i++)
+     	{
 	        var count0 = 0;
      		var count10 = 0;
      		var count20 = 0;
@@ -237,7 +243,13 @@ td {
      		var count60 = 0;
      		var count70 = 0;
      		var count80 = 0;
-     		var categoryNum, cardGroupCount, cardLineCount;
+     		var categoryNum = 0;
+     		var cardGroupCount = 0;
+     		var cardLineCount = 0;
+     		
+     		CardLine1 = MyCards[i][0];
+     		CardLine2 = MyCards[i][1];
+     		CardLine3 = MyCards[i][2];
      		
      		for (var j=9;j<15;j++)
      		{
@@ -270,58 +282,68 @@ td {
      			{
      				categoryNum = 8;
      			}
-	     			
+
      			switch(categoryNum)
      			{
      				case 0:
-     					count0 += 1;
+     					count0++;
      					cardGroupCount = count0;
      				break;
      				
      				case 1:
-     					count10 += 1;
+     					count10++;
      					cardGroupCount = count10;
      				break;
      				
      				case 2:
-     					count20 += 1;
+     					count20++;
      					cardGroupCount = count20;
      				break;
      				
      				case 3:
-     					count30 += 1;
+     					count30++;
      					cardGroupCount = count30;
      				break;
      				
      				case 4:
-     					count40 += 1;
+     					count40++;
      					cardGroupCount = count40;
      				break;
      				
      				case 5:
-     					count50 += 1;
+     					count50++;
      					cardGroupCount = count50;
      				break;
      				
      				case 6:
-     					count60 += 1;
+     					count60++;
      					cardGroupCount = count60;
      				break;
      				
      				case 7:
-     					count70 += 1;
+     					count70++;
      					cardGroupCount = count70;
      				break;
      				
      				case 8:
-     					count80 += 1;
+     					count80++;
      					cardGroupCount = count80;
      				break;
      			}
      			
-     			if (cardGroupCount >= 3)
+     			//Insert numbers of current line array into array, then check if the category num is found in it. If so, then re-pick
+     			var Line = [];
+     			Line = GetLineCategory(TempArray);
+     			
+     			var FoundNumber;
+     			
+     			//Check number rules: no more than 3 per category per card, no more than 1 per category per line
+     			if (cardGroupCount >= 3 || Line.indexOf(Math.floor(RandNum / 10)) > -1)
      			{
+     				FoundNumber = false;
      				var TempArrayFull = arrayFull;
+     				
+     				//Go through remaining numbers i - PROBLEM HERE
      				for (var t=0;t<TempArrayFull.length;t++)
      				{
      					RandNum = TempArrayFull[Math.floor(Math.random() * TempArrayFull.length - 1) + 1];
@@ -331,63 +353,169 @@ td {
 		     			{
 		     				categoryNum = 8;
 		     			}
-	     			
+
 	     				switch(categoryNum)
 		     			{
 		     				case 0:
-		     					count0 += 1;
+		     					count0++;
 		     					cardGroupCount = count0;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count0--;
+		     					}
 		     				break;
-		     				
+
 		     				case 1:
-		     					count10 += 1;
+		     					count10++;
 		     					cardGroupCount = count10;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count10--;
+		     					}
 		     				break;
-		     				
+
 		     				case 2:
-		     					count20 += 1;
+		     					count20++;
 		     					cardGroupCount = count20;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count20--;
+		     					}
 		     				break;
-		     				
+
 		     				case 3:
-		     					count30 += 1;
+		     					count30++;
 		     					cardGroupCount = count30;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count30--;
+		     					}
 		     				break;
-		     				
+
 		     				case 4:
-		     					count40 += 1;
+		     					count40++;
 		     					cardGroupCount = count40;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count40--;
+		     					}
 		     				break;
-		     				
+
 		     				case 5:
-		     					count50 += 1;
+		     					count50++;
 		     					cardGroupCount = count50;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count50--;
+		     					}
 		     				break;
-		     				
+
 		     				case 6:
-		     					count60 += 1;
+		     					count60++;
 		     					cardGroupCount = count60;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count60--;
+		     					}
 		     				break;
-		     				
+
 		     				case 7:
-		     					count70 += 1;
+		     					count70++;
 		     					cardGroupCount = count70;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count70--;
+		     					}
 		     				break;
-		     				
+
 		     				case 8:
-		     					count80 += 1;
+		     					count80++;
 		     					cardGroupCount = count80;
+		     					FoundNumber = CheckValidNumber(cardGroupCount, RandNum, Line);
+		     					
+		     					if (!FoundNumber)
+		     					{
+		     						count80--;
+		     					}
 		     				break;
 		     			}
-		     			
-		     			if (cardGroupCount < 3)
+
+		     			if (FoundNumber)
 		     			{
 		     				break;
 		     			}
      				}
+     				
+     				
+     				if (!FoundNumber)
+ 					{
+ 						//For each card
+ 						for (var x=0;x<6;x++)
+ 						{
+ 							var TempCard = MyCards[x];
+ 							
+ 							//For each line
+ 							for (var y=0;y<3;y++)
+ 							{
+ 								var CurrLine = GetLineCategory(MyCards[i][(CardLineID - 1)]);
+ 								var PrevLine = GetLineCategory(MyCards[x][y]);
+ 								
+ 								//var TempLine = MyCards[x][y];
+ 								
+ 								//For each number
+ 								for (var z=3;z<5;z++)
+ 								{
+ 									var TempNum = MyCards[x][y][z];
+ 									var PrevCategoryCount = GetCategoryNumber(TempCard, Math.floor(TempNum / 10)); //Get Total number of numbers in that category already in that card
+ 									var CurrCategoryCount = GetCategoryNumber(MyCards[i], Math.floor(RandNum / 10));
+ 									
+ 									//If replace line doesn't have another number in that category and more than 3 for the card, AND current line doesn't have replace 
+ 									//number in that category, swap numbers
+ 									if (PrevLine.indexOf(Math.floor(RandNum / 10)) == -1 && PrevCategoryCount < 3 && CurrLine.indexOf(Math.floor(TempNum / 10)) == -1 && CurrCategoryCount < 3)
+ 									{
+ 										//Replace number with current number
+ 										MyCards[x][y][z] = RandNum;
+ 										
+ 										//Set RandNum to replaced number to add to current line/card
+ 										RandNum = TempNum;
+ 										
+ 										FoundNumber = true;
+ 										break;
+ 									}
+ 								}
+ 								
+ 								if (FoundNumber)
+ 								{
+ 									y = 4;
+ 								}
+ 							}
+ 							
+ 							if (FoundNumber)
+							{
+								x = 7;
+							}
+ 						}
+ 						
+     				}
      			}
      			
-     			MyNumbers.push(RandNum);
+     			//Add to temp Array
      			TempArray.push(RandNum);
      			
      			arrayFull.splice(arrayFull.indexOf(RandNum), 1);
@@ -395,198 +523,109 @@ td {
      			//document.getElementById("numbers").innerHTML += "RandNum: " + RandNum + "<br /> Category: " + Math.floor(RandNum / 10) + "<br />";
      		}
      		
+     		//Set line # to temp array
      		switch (CardLineID)
  			{
  				case 1:
- 				CardLine1 = TempArray;
+ 					CardLine1 = TempArray;
  				break;
  				
  				case 2:
- 				CardLine2 = TempArray;
+ 					CardLine2 = TempArray;
  				break;
  				
  				case 3:
- 				CardLine3 = TempArray;
+ 					CardLine3 = TempArray;
  				break;
  			}
- 			
-	        document.getElementById("numbers").innerHTML += MyNumbers + "<br />" + arrayFull + " (" + arrayFull.length + ")<br />" + CardLine1 + "<br />" + CardLine2 + "<br />" + CardLine3 + "<br /><br />";
-	        
-        	var squareID = (Math.floor(RandNum / 10)) + 1;
- 			if (squareID == 10)
- 			{
- 				squareID = 9;
- 			}
- 			
-	     	//document.getElementById("c" + (i + 1) + "r" + CardLineID + "s" + squareID).innerHTML = CardNum;
-	
+ 			//Set lines to card
+ 			MyCards[i] = [CardLine1, CardLine2, CardLine3];
+			document.getElementById("numbers").innerHTML += MyCards[i][0] + "<br />" + MyCards[i][1] + "<br />" + MyCards[i][2] + "<br /><br />";
+			
+ 			//document.getElementById("numbers").innerHTML += arrayFull + " (" + arrayFull.length + ")<br />" + CardLine1 + "<br />" + CardLine2 + "<br />" + CardLine3 + "<br /><br />";
+			
+				
 	        //Show card
-     		document.getElementById("card" + (i + 1)).style.display = 'block';
-     		document.getElementById("card" + (i + 1)).style.visibility = 'visible';
+     		//document.getElementById("card" + (i + 1)).style.display = 'block';
+     		//document.getElementById("card" + (i + 1)).style.visibility = 'visible';
 	    }
 	    
-	    //Add remaining numbers
-//	    for (var i=0;i<NumberOfCards;i++)
-//     	{
-//     		MyCards[i].sort();
-//     		document.getElementById("numbers").innerHTML += MyCards[i] + "<br />" + arrayFull + " (" + arrayFull.length + ")<br /><br />";
-//     		
-//     		var TempArray = MyCards[i];
-//     		
-//     		//Add numbers to card
-//     		for (var a=1;a<4;a++)
-//     		{
-//     			var LineArray = [];
-//     			count0 = 0;
-//	     		count10 = 0;
-//	     		count20 = 0;
-//	     		count30 = 0;
-//	     		count40 = 0;
-//	     		count50 = 0;
-//	     		count60 = 0;
-//	     		count70 = 0;
-//	     		count80 = 0;
-//		     	categoryCount = 0;
-//		     	
-//	     		for (var b=1;b<6;b++)
-//	     		{
-//	     			var CardNum = TempArray[Math.floor(Math.random() * TempArray.length - 1) + 1];
-//	     			categoryNum = Math.floor(CardNum / 10);
-//	     			if (categoryNum == 9)
-//	     			{
-//	     				categoryNum = 8;
-//	     			}
-//	     			
-//	     			switch(categoryNum)
-//	     			{
-//	     				case 0:
-//	     					count0 += 1;
-//	     					categoryCount = count0;
-//	     				break;
-//	     				
-//	     				case 1:
-//	     					count10 += 1;
-//	     					categoryCount = count10;
-//	     				break;
-//	     				
-//	     				case 2:
-//	     					count20 += 1;
-//	     					categoryCount = count20;
-//	     				break;
-//	     				
-//	     				case 3:
-//	     					count30 += 1;
-//	     					categoryCount = count30;
-//	     				break;
-//	     				
-//	     				case 4:
-//	     					count40 += 1;
-//	     					categoryCount = count40;
-//	     				break;
-//	     				
-//	     				case 5:
-//	     					count50 += 1;
-//	     					categoryCount = count50;
-//	     				break;
-//	     				
-//	     				case 6:
-//	     					count60 += 1;
-//	     					categoryCount = count60;
-//	     				break;
-//	     				
-//	     				case 7:
-//	     					count70 += 1;
-//	     					categoryCount = count70;
-//	     				break;
-//	     				
-//	     				case 8:
-//	     					count80 += 1;
-//	     					categoryCount = count80;
-//	     				break;
-//	     			}
-//	     			
-//	     			if (categoryCount > 1)
-//	     			{
-//	     				var TempArrayFullLine = TempArray;
-//	     				for (var t=0;t<TempArrayFullLine.length;t++)
-//	     				{
-//	     					CardNum = TempArrayFullLine[Math.floor(Math.random() * TempArrayFullLine.length - 1) + 1];
-//	     					categoryNum = Math.floor(CardNum / 10);
-//	     					
-//	     					if (categoryNum == 9)
-//			     			{
-//			     				categoryNum = 8;
-//			     			}
-//		     			
-//		     				switch(categoryNum)
-//			     			{
-//			     				case 0:
-//			     					count0 += 1;
-//			     					categoryCount = count0;
-//			     				break;
-//			     				
-//			     				case 1:
-//			     					count10 += 1;
-//			     					categoryCount = count10;
-//			     				break;
-//			     				
-//			     				case 2:
-//			     					count20 += 1;
-//			     					categoryCount = count20;
-//			     				break;
-//			     				
-//			     				case 3:
-//			     					count30 += 1;
-//			     					categoryCount = count30;
-//			     				break;
-//			     				
-//			     				case 4:
-//			     					count40 += 1;
-//			     					categoryCount = count40;
-//			     				break;
-//			     				
-//			     				case 5:
-//			     					count50 += 1;
-//			     					categoryCount = count50;
-//			     				break;
-//			     				
-//			     				case 6:
-//			     					count60 += 1;
-//			     					categoryCount = count60;
-//			     				break;
-//			     				
-//			     				case 7:
-//			     					count70 += 1;
-//			     					categoryCount = count70;
-//			     				break;
-//			     				
-//			     				case 8:
-//			     					count80 += 1;
-//			     					categoryCount = count80;
-//			     				break;
-//			     			}
-//			     			
-//			     			
-//			     			TempArrayFullLine.splice(TempArrayFullLine.indexOf(CardNum), 1);
-//			     			
-//			     			if (categoryCount < 2)
-//			     			{
-//			     				break;
-//			     			}
-//	     				}
-//	     				
-//	     			}
-//	     			
-//	     			LineArray.push(CardNum);
-//	     			TempArray.splice(TempArray.indexOf(CardNum), 1);
-//	     			
-//	 				document.getElementById("numbers").innerHTML += LineArray + "<br />" + "c" + (i + 1) + "r" + a + "s" + squareID + "<br />";
-//	     		}
-//	     	}
-//     	}
-	    
+	    //Add numbers to 
+    	for (var x=0;x<NumberOfCards;x++)
+		{
+			var TempCard = MyCards[x];
+			
+			//For each line
+			for (var y=0;y<3;y++)
+			{	
+				//var TempLine = MyCards[x][y];
+				
+				//For each number
+				for (var z=0;z<5;z++)
+				{
+					//Add to card table
+		        	var squareID = (Math.floor(MyCards[x][y][z] / 10)) + 1;
+		 			if (squareID == 10)
+		 			{
+		 				squareID = 9;
+		 			}
+		 			
+			     	document.getElementById("c" + (x + 1) + "r" + (y + 1) + "s" + squareID).innerHTML =  MyCards[x][y][z];
+				}
+			}
+			
+			 //Show card
+     		document.getElementById("card" + (x + 1)).style.display = 'block';
+     		document.getElementById("card" + (x + 1)).style.visibility = 'visible';
+		}
     }
-  
+    
+    function CheckValidNumber(cardGroupCount, RandNum, Line)
+    {
+		if (cardGroupCount <= 3 && Line.indexOf(Math.floor(RandNum / 10)) == -1)
+		{
+			return true;
+		}
+		
+		else 
+		{
+			return false;
+		}
+    }
+  	
+  	function GetLineCategory(TempArray)
+  	{
+  		var Line = [];
+  		
+		for (var a=0; a<TempArray.length; a++)
+		{
+			var TACat = Math.floor(TempArray[a] / 10);
+			Line.push(TACat);
+		}
+		
+		return Line;
+  	}
+  	
+  	function GetCategoryNumber(CardArray, categoryNum)
+  	{
+  		var Count = 0;
+  		//Line
+  		for (var a=0; a<3; a++)
+		{
+			for (var b=0; b<5;b++)
+			{
+				var Category = Math.floor(CardArray[a][b] / 10);
+				
+				if (Category == categoryNum)
+				{
+					Count++;
+				}
+			}
+		}
+		
+		return Count;
+  	}
+  	
   	function checkCard()
   	{
   		
